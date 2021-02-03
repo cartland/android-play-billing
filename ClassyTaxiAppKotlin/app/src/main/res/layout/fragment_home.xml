@@ -33,19 +33,18 @@
         android:fillViewport="true">
 
         <FrameLayout
+            app:monitorSubscriptions="@{subscriptionViewModel.subscriptions}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ProgressBar
-                app:loadingProgressBar="@{subscriptionViewModel.loading}"
-                android:visibility="gone"
+                android:visibility="@{subscriptionViewModel.loading ? View.VISIBLE : View.GONE}"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:indeterminate="true"/>
 
             <LinearLayout
-                app:updateHomeViews="@{subscriptionViewModel.subscriptions}"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -65,6 +64,8 @@
 
                         <TextView
                             android:id="@+id/home_restore_message"
+                            android:visibility="@{subscriptionViewModel.showRestoreUI ? View.VISIBLE : View.GONE}"
+                            android:text="@{subscriptionViewModel.restoreMessageWithDate}"
                             android:textColor="@color/secondaryTextColor"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -75,6 +76,7 @@
 
                         <TextView
                             android:id="@+id/home_grace_period_message"
+                            android:visibility="@{subscriptionViewModel.showGracePeriodUI ? View.VISIBLE : View.GONE}"
                             android:text="@string/grace_period_message"
                             android:textColor="@color/secondaryTextColor"
                             android:layout_width="match_parent"
@@ -104,6 +106,7 @@
 
                         <LinearLayout
                             android:id="@+id/home_transfer_message"
+                            android:visibility="@{subscriptionViewModel.showTransferUI ? View.VISIBLE : View.GONE}"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -128,6 +131,7 @@
 
                         <LinearLayout
                             android:id="@+id/home_account_hold_message"
+                            android:visibility="@{subscriptionViewModel.showAccountHoldUI ? View.VISIBLE : View.GONE}"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -162,6 +166,7 @@
 
                         <LinearLayout
                             android:id="@+id/home_account_paused_message"
+                            android:visibility="@{subscriptionViewModel.showAccountPausedUI ? View.VISIBLE : View.GONE}"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -196,6 +201,7 @@
 
                         <LinearLayout
                             android:id="@+id/home_basic_message"
+                            android:visibility="@{subscriptionViewModel.showBasicSubscriptionUI ? View.VISIBLE : View.GONE}"
                             app:updateBasicContent="@{subscriptionViewModel.basicContent}"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
@@ -220,6 +226,7 @@
 
                         <LinearLayout
                             android:id="@+id/home_paywall_message"
+                            android:visibility="@{subscriptionViewModel.showPaywallUI ? View.VISIBLE : View.GONE}"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

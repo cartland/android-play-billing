@@ -20,6 +20,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable name="billingViewModel"
             type="com.example.subscriptions.ui.BillingViewModel"/>
         <variable name="subscriptionViewModel"
@@ -32,19 +33,18 @@
         android:fillViewport="true">
 
         <FrameLayout
+            app:monitorSubscriptions="@{subscriptionViewModel.subscriptions}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <ProgressBar
-                app:loadingProgressBar="@{subscriptionViewModel.loading}"
-                android:visibility="gone"
+                android:visibility="@{subscriptionViewModel.loading ? View.VISIBLE : View.GONE}"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:indeterminate="true"/>
 
             <LinearLayout
-                app:updatePremiumViews="@{subscriptionViewModel.subscriptions}"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -59,6 +59,8 @@
 
                     <TextView
                         android:id="@+id/premium_restore_message"
+                        android:visibility="@{subscriptionViewModel.showRestoreUI ? View.VISIBLE : View.GONE}"
+                        android:text="@{subscriptionViewModel.restoreMessageWithDate}"
                         android:textColor="@color/secondaryTextColor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -69,6 +71,7 @@
 
                     <TextView
                         android:id="@+id/premium_grace_period_message"
+                        android:visibility="@{subscriptionViewModel.showGracePeriodUI ? View.VISIBLE : View.GONE}"
                         android:text="@string/grace_period_message"
                         android:textColor="@color/secondaryTextColor"
                         android:layout_width="match_parent"
@@ -96,6 +99,7 @@
 
                         <LinearLayout
                             android:id="@+id/premium_transfer_message"
+                            android:visibility="@{subscriptionViewModel.showTransferUI ? View.VISIBLE : View.GONE}"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -121,6 +125,7 @@
 
                         <LinearLayout
                             android:id="@+id/premium_account_hold_message"
+                            android:visibility="@{subscriptionViewModel.showAccountHoldUI ? View.VISIBLE : View.GONE}"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -155,6 +160,7 @@
 
                         <LinearLayout
                             android:id="@+id/premium_account_paused_message"
+                            android:visibility="@{subscriptionViewModel.showAccountPausedUI ? View.VISIBLE : View.GONE}"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -189,7 +195,7 @@
 
                         <LinearLayout
                             android:id="@+id/premium_premium_content"
-                            app:updatePremiumContent="@{subscriptionViewModel.premiumContent}"
+                            android:visibility="@{subscriptionViewModel.showPremiumSubscriptionUI ? View.VISIBLE : View.GONE}"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -213,6 +219,7 @@
 
                         <LinearLayout
                             android:id="@+id/premium_paywall_message"
+                            android:visibility="@{subscriptionViewModel.showPaywallUI ? View.VISIBLE : View.GONE}"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -237,7 +244,7 @@
 
                         <LinearLayout
                             android:id="@+id/premium_upgrade_message"
-                            android:visibility="gone"
+                            android:visibility="@{subscriptionViewModel.showUpgradeUI ? View.VISIBLE : View.GONE}"
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
